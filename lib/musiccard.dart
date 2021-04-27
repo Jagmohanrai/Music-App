@@ -16,7 +16,6 @@ class MusicCard extends StatefulWidget {
 class _MusicCardState extends State<MusicCard> {
   @override
   Widget build(BuildContext context) {
-    print(widget.albumart);
     return Container(
       height: 230,
       width: 170,

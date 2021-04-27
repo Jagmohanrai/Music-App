@@ -27,9 +27,6 @@ class _MusicListState extends State<MusicList> {
   }
 
   bool loading = true;
-  Future _playLocal(String uri) async {
-    final result = await audioplayer.play(uri, isLocal: true);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -212,15 +209,18 @@ class _MusicListState extends State<MusicList> {
                             ),
                             child: InkWell(
                               onTap: () {
-                                print(song[i].albumArt);
                                 audioplayer.stop();
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => Player(),
+                                    builder: (context) => Player(
+                                      albumname: song[i].album,
+                                      singername: song[i].artist,
+                                      songname: song[i].title,
+                                      uri: song[i].uri,
+                                    ),
                                   ),
                                 );
-                                _playLocal(song[i].uri);
                               },
                               child: Container(
                                 height: 100,
