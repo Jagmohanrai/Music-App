@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:musicap/player.dart';
+import 'constants.dart' as cst;
 
 class MusicList extends StatefulWidget {
   @override
@@ -29,15 +30,6 @@ class _MusicListState extends State<MusicList> {
     });
   }
 
-  // void findMusic() async {
-  //   List<Song> songs = await MusicFinder.allSongs();
-  //   songs = new List.from(songs);
-  //   setState(() {
-  //     song = songs;
-  //     loading = false;
-  //   });
-  // }
-
   void changetrack(bool isnext) {
     if (isnext) {
       if (currentIndex != songs.length - 1) {
@@ -59,27 +51,31 @@ class _MusicListState extends State<MusicList> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(70),
+          preferredSize:
+              Size.fromHeight(70 * cst.responsiveCofficient(context)),
           child: AppBar(
             leading: Icon(
               Icons.menu,
               color: Colors.black45,
-              size: 30,
+              size: 30 * cst.responsiveCofficient(context),
             ),
             centerTitle: true,
             title: Text(
               'Discover',
-              style: TextStyle(color: Colors.black45, fontSize: 25),
+              style: TextStyle(
+                  color: Colors.black45,
+                  fontSize: 25 * cst.responsiveCofficient(context)),
             ),
             backgroundColor: Colors.white,
             elevation: 0,
             actions: [
               Padding(
-                padding: EdgeInsets.only(right: 10.0),
+                padding: EdgeInsets.only(
+                    right: 10.0 * cst.responsiveCofficient(context)),
                 child: Icon(
                   Icons.more_vert_rounded,
                   color: Colors.black45,
-                  size: 30,
+                  size: 30 * cst.responsiveCofficient(context),
                 ),
               ),
             ],
@@ -90,27 +86,28 @@ class _MusicListState extends State<MusicList> {
                 child: CircularProgressIndicator(),
               )
             : Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: EdgeInsets.symmetric(
+                    horizontal: 20 * cst.responsiveCofficient(context)),
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        height: 20,
+                        height: 20 * cst.responsiveCofficient(context),
                       ),
                       Text(
                         'Welcome !',
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 28,
+                          fontSize: 28 * cst.responsiveCofficient(context),
                           fontWeight: FontWeight.w500,
                         ),
                       ),
                       SizedBox(
-                        height: 20,
+                        height: 20 * cst.responsiveCofficient(context),
                       ),
                       Container(
-                        height: 70,
+                        height: 70 * cst.responsiveCofficient(context),
                         width: double.infinity,
                         decoration: BoxDecoration(
                           color: Colors.white,
@@ -126,7 +123,9 @@ class _MusicListState extends State<MusicList> {
                           ],
                         ),
                         child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          padding: EdgeInsets.symmetric(
+                              horizontal:
+                                  20 * cst.responsiveCofficient(context)),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -134,13 +133,14 @@ class _MusicListState extends State<MusicList> {
                                 'Search music, album.....',
                                 style: TextStyle(
                                   color: Colors.black45,
-                                  fontSize: 16,
+                                  fontSize:
+                                      16 * cst.responsiveCofficient(context),
                                 ),
                               ),
                               Icon(
                                 Icons.search_rounded,
                                 color: Colors.black45,
-                                size: 35,
+                                size: 35 * cst.responsiveCofficient(context),
                               )
                             ],
                           ),
@@ -150,7 +150,8 @@ class _MusicListState extends State<MusicList> {
                         height: 20,
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 10 * cst.responsiveCofficient(context)),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -158,26 +159,29 @@ class _MusicListState extends State<MusicList> {
                               'Music Trending',
                               style: TextStyle(
                                   color: Colors.black,
-                                  fontSize: 20,
+                                  fontSize:
+                                      20 * cst.responsiveCofficient(context),
                                   fontWeight: FontWeight.w500),
                             ),
                             Text(
                               'Show more',
                               style: TextStyle(
-                                  color: Colors.black45, fontSize: 16),
+                                  color: Colors.black45,
+                                  fontSize:
+                                      16 * cst.responsiveCofficient(context)),
                             ),
                           ],
                         ),
                       ),
                       SizedBox(
-                        height: 20,
+                        height: 20 * cst.responsiveCofficient(context),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                            height: 230,
-                            width: 170,
+                            height: 230 * cst.responsiveCofficient(context),
+                            width: 170 * cst.responsiveCofficient(context),
                             decoration: BoxDecoration(
                               image: DecorationImage(
                                   fit: BoxFit.fill,
@@ -185,13 +189,16 @@ class _MusicListState extends State<MusicList> {
                                     'assets/album.jpg',
                                   )),
                               color: Colors.black,
-                              borderRadius: BorderRadius.circular(30),
+                              borderRadius: BorderRadius.circular(
+                                  30 * cst.responsiveCofficient(context)),
                             ),
                             child: Align(
                               alignment: Alignment(0, 0.88),
                               child: Padding(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 0),
+                                    horizontal:
+                                        10 * cst.responsiveCofficient(context),
+                                    vertical: 0),
                                 child: InkWell(
                                   onTap: () {
                                     currentIndex = 1;
@@ -207,7 +214,8 @@ class _MusicListState extends State<MusicList> {
                                     );
                                   },
                                   child: Container(
-                                    height: 50,
+                                    height:
+                                        50 * cst.responsiveCofficient(context),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
                                       color: Colors.white60,
@@ -221,11 +229,17 @@ class _MusicListState extends State<MusicList> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Container(
-                                              width: 120,
+                                              width: 120 *
+                                                  cst.responsiveCofficient(
+                                                      context),
                                               child: Padding(
                                                 padding: EdgeInsets.only(
-                                                  top: 4.0,
-                                                  left: 4.0,
+                                                  top: 4.0 *
+                                                      cst.responsiveCofficient(
+                                                          context),
+                                                  left: 4.0 *
+                                                      cst.responsiveCofficient(
+                                                          context),
                                                 ),
                                                 child: Text(
                                                   songs[3].title,
@@ -239,16 +253,25 @@ class _MusicListState extends State<MusicList> {
                                               ),
                                             ),
                                             Container(
-                                              width: 120,
+                                              width: 120 *
+                                                  cst.responsiveCofficient(
+                                                      context),
                                               child: Padding(
                                                 padding: EdgeInsets.only(
-                                                    top: 4.0, left: 4.0),
+                                                    top: 4.0 *
+                                                        cst.responsiveCofficient(
+                                                            context),
+                                                    left: 4.0 *
+                                                        cst.responsiveCofficient(
+                                                            context)),
                                                 child: Text(
                                                   songs[1].artist,
                                                   overflow:
                                                       TextOverflow.ellipsis,
-                                                  style:
-                                                      TextStyle(fontSize: 12),
+                                                  style: TextStyle(
+                                                      fontSize: 12 *
+                                                          cst.responsiveCofficient(
+                                                              context)),
                                                 ),
                                               ),
                                             ),
@@ -266,8 +289,8 @@ class _MusicListState extends State<MusicList> {
                             ),
                           ),
                           Container(
-                            height: 230,
-                            width: 170,
+                            height: 230 * cst.responsiveCofficient(context),
+                            width: 170 * cst.responsiveCofficient(context),
                             decoration: BoxDecoration(
                               image: DecorationImage(
                                   fit: BoxFit.fill,
@@ -275,13 +298,16 @@ class _MusicListState extends State<MusicList> {
                                     'assets/album.jpg',
                                   )),
                               color: Colors.black,
-                              borderRadius: BorderRadius.circular(30),
+                              borderRadius: BorderRadius.circular(
+                                  30 * cst.responsiveCofficient(context)),
                             ),
                             child: Align(
                               alignment: Alignment(0, 0.88),
                               child: Padding(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 0),
+                                    horizontal:
+                                        10 * cst.responsiveCofficient(context),
+                                    vertical: 0),
                                 child: InkWell(
                                   onTap: () {
                                     currentIndex = 3;
@@ -297,9 +323,11 @@ class _MusicListState extends State<MusicList> {
                                     );
                                   },
                                   child: Container(
-                                    height: 50,
+                                    height:
+                                        50 * cst.responsiveCofficient(context),
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
+                                      borderRadius: BorderRadius.circular(10 *
+                                          cst.responsiveCofficient(context)),
                                       color: Colors.white60,
                                     ),
                                     child: Row(
@@ -311,11 +339,17 @@ class _MusicListState extends State<MusicList> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Container(
-                                              width: 120,
+                                              width: 120 *
+                                                  cst.responsiveCofficient(
+                                                      context),
                                               child: Padding(
                                                 padding: EdgeInsets.only(
-                                                  top: 4.0,
-                                                  left: 4.0,
+                                                  top: 4.0 *
+                                                      cst.responsiveCofficient(
+                                                          context),
+                                                  left: 4.0 *
+                                                      cst.responsiveCofficient(
+                                                          context),
                                                 ),
                                                 child: Text(
                                                   songs[3].title,
@@ -329,16 +363,25 @@ class _MusicListState extends State<MusicList> {
                                               ),
                                             ),
                                             Container(
-                                              width: 120,
+                                              width: 120 *
+                                                  cst.responsiveCofficient(
+                                                      context),
                                               child: Padding(
                                                 padding: EdgeInsets.only(
-                                                    top: 4.0, left: 4.0),
+                                                    top: 4.0 *
+                                                        cst.responsiveCofficient(
+                                                            context),
+                                                    left: 4.0 *
+                                                        cst.responsiveCofficient(
+                                                            context)),
                                                 child: Text(
                                                   songs[3].artist,
                                                   overflow:
                                                       TextOverflow.ellipsis,
-                                                  style:
-                                                      TextStyle(fontSize: 12),
+                                                  style: TextStyle(
+                                                      fontSize: 12 *
+                                                          cst.responsiveCofficient(
+                                                              context)),
                                                 ),
                                               ),
                                             ),
@@ -358,17 +401,19 @@ class _MusicListState extends State<MusicList> {
                         ],
                       ),
                       SizedBox(
-                        height: 20,
+                        height: 20 * cst.responsiveCofficient(context),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 20 * cst.responsiveCofficient(context)),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
                               'Recently',
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize:
+                                    18 * cst.responsiveCofficient(context),
                                 color: Colors.black,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -376,7 +421,8 @@ class _MusicListState extends State<MusicList> {
                             Text(
                               'Popular',
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize:
+                                    18 * cst.responsiveCofficient(context),
                                 color: Colors.black45,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -384,7 +430,8 @@ class _MusicListState extends State<MusicList> {
                             Text(
                               'Similer',
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize:
+                                    18 * cst.responsiveCofficient(context),
                                 color: Colors.black45,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -393,15 +440,16 @@ class _MusicListState extends State<MusicList> {
                         ),
                       ),
                       SizedBox(
-                        height: 20,
+                        height: 20 * cst.responsiveCofficient(context),
                       ),
                       Container(
-                        height: 500,
+                        height: 500 * cst.responsiveCofficient(context),
                         child: ListView.builder(
                           itemBuilder: (context, i) => Padding(
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 10,
-                              horizontal: 10,
+                            padding: EdgeInsets.symmetric(
+                              vertical: 10 * cst.responsiveCofficient(context),
+                              horizontal:
+                                  10 * cst.responsiveCofficient(context),
                             ),
                             child: InkWell(
                               onTap: () {
@@ -418,17 +466,20 @@ class _MusicListState extends State<MusicList> {
                                 );
                               },
                               child: Container(
-                                height: 100,
+                                height: 100 * cst.responsiveCofficient(context),
                                 width: double.infinity,
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Container(
-                                      height: 90,
-                                      width: 80,
+                                      height: 90 *
+                                          cst.responsiveCofficient(context),
+                                      width: 80 *
+                                          cst.responsiveCofficient(context),
                                       decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(25),
+                                        borderRadius: BorderRadius.circular(25 *
+                                            cst.responsiveCofficient(context)),
                                         image: DecorationImage(
                                           image: songs[i].albumArtwork == null
                                               ? AssetImage('assets/album.jpg')
@@ -446,30 +497,37 @@ class _MusicListState extends State<MusicList> {
                                           MainAxisAlignment.center,
                                       children: [
                                         Container(
-                                          width: 200,
+                                          width: 200 *
+                                              cst.responsiveCofficient(context),
                                           child: Text(
                                             songs[i].title,
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 1,
                                             softWrap: false,
                                             style: TextStyle(
-                                              fontSize: 16,
+                                              fontSize: 16 *
+                                                  cst.responsiveCofficient(
+                                                      context),
                                               fontWeight: FontWeight.w500,
                                             ),
                                           ),
                                         ),
                                         SizedBox(
-                                          height: 10,
+                                          height: 10 *
+                                              cst.responsiveCofficient(context),
                                         ),
                                         Container(
-                                          width: 200,
+                                          width: 200 *
+                                              cst.responsiveCofficient(context),
                                           child: Text(
                                             songs[i].artist,
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 1,
                                             softWrap: false,
                                             style: TextStyle(
-                                              fontSize: 16,
+                                              fontSize: 16 *
+                                                  cst.responsiveCofficient(
+                                                      context),
                                               color: Colors.black45,
                                             ),
                                           ),

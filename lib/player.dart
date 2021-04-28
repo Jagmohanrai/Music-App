@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:musicap/songsList.dart';
+import 'constants.dart' as cst;
 
 class Player extends StatefulWidget {
   SongInfo songInfo;
@@ -111,18 +112,20 @@ class PlayerState extends State<Player> {
             ),
             centerTitle: true,
             title: Padding(
-              padding: EdgeInsets.only(right: 8.0),
+              padding: EdgeInsets.only(
+                  right: 8.0 * cst.responsiveCofficient(context)),
               child: Text(
                 'Player',
                 style: TextStyle(
                   color: Colors.black45,
-                  fontSize: 25,
+                  fontSize: 25 * cst.responsiveCofficient(context),
                 ),
               ),
             ),
             actions: [
               Padding(
-                padding: EdgeInsets.only(right: 10.0),
+                padding: EdgeInsets.only(
+                    right: 10.0 * cst.responsiveCofficient(context)),
                 child: Icon(
                   Icons.more_vert,
                   color: Colors.black45,
@@ -130,10 +133,12 @@ class PlayerState extends State<Player> {
               ),
             ],
           ),
-          preferredSize: Size.fromHeight(70),
+          preferredSize:
+              Size.fromHeight(70 * cst.responsiveCofficient(context)),
         ),
         body: Padding(
-          padding: EdgeInsets.only(top: 10.0),
+          padding:
+              EdgeInsets.only(top: 10.0 * cst.responsiveCofficient(context)),
           child: Container(
             width: double.infinity,
             height: MediaQuery.of(context).size.height,
@@ -147,42 +152,46 @@ class PlayerState extends State<Player> {
                 ),
               ],
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(50),
-                topRight: Radius.circular(50),
+                topLeft:
+                    Radius.circular(50 * cst.responsiveCofficient(context)),
+                topRight:
+                    Radius.circular(50 * cst.responsiveCofficient(context)),
               ),
               color: Colors.white,
             ),
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(
+                  horizontal: 20 * cst.responsiveCofficient(context)),
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(top: 8.0),
+                    padding: EdgeInsets.only(
+                        top: 8.0 * cst.responsiveCofficient(context)),
                     child: Container(
-                      width: 50,
+                      width: 50 * cst.responsiveCofficient(context),
                       child: Divider(
-                        thickness: 5,
+                        thickness: 5 * cst.responsiveCofficient(context),
                         color: Colors.black12,
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 15,
+                    height: 15 * cst.responsiveCofficient(context),
                   ),
                   Text(
                     'Listening to',
                     style: TextStyle(
                       color: Colors.black,
-                      fontSize: 28,
+                      fontSize: 28 * cst.responsiveCofficient(context),
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   SizedBox(
-                    height: 50,
+                    height: 50 * cst.responsiveCofficient(context),
                   ),
                   Container(
-                    height: 320,
-                    width: 320,
+                    height: 320 * cst.responsiveCofficient(context),
+                    width: 320 * cst.responsiveCofficient(context),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
                       image: DecorationImage(
@@ -191,22 +200,24 @@ class PlayerState extends State<Player> {
                     ),
                   ),
                   SizedBox(
-                    height: 50,
+                    height: 50 * cst.responsiveCofficient(context),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 20 * cst.responsiveCofficient(context)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          width: 300,
+                          width: 300 * cst.responsiveCofficient(context),
                           child: Text(
                             widget.songInfo.title,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                             style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 20,
+                                fontSize:
+                                    20 * cst.responsiveCofficient(context),
                                 fontWeight: FontWeight.w500),
                           ),
                         ),
@@ -218,25 +229,26 @@ class PlayerState extends State<Player> {
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 10 * cst.responsiveCofficient(context),
                   ),
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 20 * cst.responsiveCofficient(context)),
                       child: Text(
                         widget.songInfo.artist + "-" + widget.songInfo.album,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 18 * cst.responsiveCofficient(context),
                           color: Colors.black45,
                         ),
                       ),
                     ),
                   ),
                   Container(
-                    width: 450,
+                    width: 450 * cst.responsiveCofficient(context),
                     child: Slider(
                       activeColor: Color.fromRGBO(38, 78, 139, 1),
                       inactiveColor: Colors.black38,
@@ -253,18 +265,21 @@ class PlayerState extends State<Player> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 20 * cst.responsiveCofficient(context)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           currentTime,
-                          style: TextStyle(fontSize: 17, color: Colors.black45),
+                          style: TextStyle(
+                              fontSize: 17 * cst.responsiveCofficient(context),
+                              color: Colors.black45),
                         ),
                         Text(
                           endTime,
                           style: TextStyle(
-                            fontSize: 17,
+                            fontSize: 17 * cst.responsiveCofficient(context),
                             color: Colors.black45,
                           ),
                         ),
@@ -272,14 +287,14 @@ class PlayerState extends State<Player> {
                     ),
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 30 * cst.responsiveCofficient(context),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Icon(
                         Icons.shuffle,
-                        size: 40,
+                        size: 40 * cst.responsiveCofficient(context),
                         color: Colors.black45,
                       ),
                       InkWell(
@@ -288,7 +303,7 @@ class PlayerState extends State<Player> {
                         },
                         child: Icon(
                           Icons.skip_previous,
-                          size: 40,
+                          size: 40 * cst.responsiveCofficient(context),
                           color: Colors.black45,
                         ),
                       ),
@@ -300,7 +315,7 @@ class PlayerState extends State<Player> {
                           playing
                               ? Icons.pause_circle_filled_rounded
                               : Icons.play_circle_fill_rounded,
-                          size: 70,
+                          size: 70 * cst.responsiveCofficient(context),
                           color: Color.fromRGBO(38, 78, 139, 1),
                         ),
                       ),
@@ -310,7 +325,7 @@ class PlayerState extends State<Player> {
                         },
                         child: Icon(
                           Icons.skip_next,
-                          size: 40,
+                          size: 40 * cst.responsiveCofficient(context),
                           color: Colors.black45,
                         ),
                       ),
@@ -326,7 +341,7 @@ class PlayerState extends State<Player> {
                         child: Icon(
                           Icons.queue_music,
                           color: Colors.black45,
-                          size: 40,
+                          size: 40 * cst.responsiveCofficient(context),
                         ),
                       ),
                     ],

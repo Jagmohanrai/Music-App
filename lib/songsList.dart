@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:musicap/player.dart';
+import 'constants.dart' as cst;
 
 class SongList extends StatefulWidget {
   @override
@@ -62,18 +63,20 @@ class _SongListState extends State<SongList> {
             ),
             centerTitle: true,
             title: Padding(
-              padding: EdgeInsets.only(right: 8.0),
+              padding: EdgeInsets.only(
+                  right: 8.0 * cst.responsiveCofficient(context)),
               child: Text(
                 'Musics',
                 style: TextStyle(
                   color: Colors.black45,
-                  fontSize: 25,
+                  fontSize: 25 * cst.responsiveCofficient(context),
                 ),
               ),
             ),
             actions: [
               Padding(
-                padding: EdgeInsets.only(right: 10.0),
+                padding: EdgeInsets.only(
+                    right: 10.0 * cst.responsiveCofficient(context)),
                 child: Icon(
                   Icons.more_vert,
                   color: Colors.black45,
@@ -81,27 +84,29 @@ class _SongListState extends State<SongList> {
               ),
             ],
           ),
-          preferredSize: Size.fromHeight(70),
+          preferredSize:
+              Size.fromHeight(70 * cst.responsiveCofficient(context)),
         ),
         body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.symmetric(
+              horizontal: 20 * cst.responsiveCofficient(context)),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 20,
+                  height: 20 * cst.responsiveCofficient(context),
                 ),
                 Text(
                   'Music list',
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 28,
+                    fontSize: 28 * cst.responsiveCofficient(context),
                     fontWeight: FontWeight.w500,
                   ),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 20 * cst.responsiveCofficient(context),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -109,7 +114,7 @@ class _SongListState extends State<SongList> {
                     Text(
                       'Songs',
                       style: TextStyle(
-                        fontSize: 19,
+                        fontSize: 19 * cst.responsiveCofficient(context),
                         color: Colors.black,
                         fontWeight: FontWeight.w500,
                       ),
@@ -117,7 +122,7 @@ class _SongListState extends State<SongList> {
                     Text(
                       'Artist',
                       style: TextStyle(
-                        fontSize: 19,
+                        fontSize: 19 * cst.responsiveCofficient(context),
                         color: Colors.black45,
                         fontWeight: FontWeight.w500,
                       ),
@@ -125,7 +130,7 @@ class _SongListState extends State<SongList> {
                     Text(
                       'Album',
                       style: TextStyle(
-                        fontSize: 19,
+                        fontSize: 19 * cst.responsiveCofficient(context),
                         color: Colors.black45,
                         fontWeight: FontWeight.w500,
                       ),
@@ -133,7 +138,7 @@ class _SongListState extends State<SongList> {
                     Text(
                       'Playlist',
                       style: TextStyle(
-                        fontSize: 19,
+                        fontSize: 19 * cst.responsiveCofficient(context),
                         color: Colors.black45,
                         fontWeight: FontWeight.w500,
                       ),
@@ -141,15 +146,15 @@ class _SongListState extends State<SongList> {
                   ],
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 20 * cst.responsiveCofficient(context),
                 ),
                 Container(
-                  height: 660,
+                  height: 660 * cst.responsiveCofficient(context),
                   child: ListView.builder(
                     itemBuilder: (context, i) => Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 10,
+                      padding: EdgeInsets.symmetric(
+                        vertical: 10 * cst.responsiveCofficient(context),
+                        horizontal: 10 * cst.responsiveCofficient(context),
                       ),
                       child: InkWell(
                         onTap: () {
@@ -170,16 +175,17 @@ class _SongListState extends State<SongList> {
                           );
                         },
                         child: Container(
-                          height: 100,
+                          height: 100 * cst.responsiveCofficient(context),
                           width: double.infinity,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
-                                height: 90,
-                                width: 80,
+                                height: 90 * cst.responsiveCofficient(context),
+                                width: 80 * cst.responsiveCofficient(context),
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(25),
+                                  borderRadius: BorderRadius.circular(
+                                      25 * cst.responsiveCofficient(context)),
                                   image: DecorationImage(
                                     image: songs[i].albumArtwork == null
                                         ? AssetImage('assets/album.jpg')
@@ -195,30 +201,35 @@ class _SongListState extends State<SongList> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Container(
-                                    width: 200,
+                                    width:
+                                        200 * cst.responsiveCofficient(context),
                                     child: Text(
                                       songs[i].title,
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 1,
                                       softWrap: false,
                                       style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 16 *
+                                            cst.responsiveCofficient(context),
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),
                                   ),
                                   SizedBox(
-                                    height: 10,
+                                    height:
+                                        10 * cst.responsiveCofficient(context),
                                   ),
                                   Container(
-                                    width: 200,
+                                    width:
+                                        200 * cst.responsiveCofficient(context),
                                     child: Text(
                                       songs[i].artist,
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 1,
                                       softWrap: false,
                                       style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 16 *
+                                            cst.responsiveCofficient(context),
                                         color: Colors.black45,
                                       ),
                                     ),
