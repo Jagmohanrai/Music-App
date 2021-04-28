@@ -1,4 +1,3 @@
-import 'package:flute_music_player/flute_music_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:just_audio/just_audio.dart';
@@ -20,7 +19,6 @@ class Player extends StatefulWidget {
 }
 
 class PlayerState extends State<Player> {
-  MusicFinder audioPlayer = new MusicFinder();
   AudioPlayer player = new AudioPlayer();
 
   bool playing = false;
@@ -84,12 +82,6 @@ class PlayerState extends State<Player> {
     } else {
       player.pause();
     }
-  }
-
-  Future pause() async {
-    final result = await audioPlayer.pause();
-    playing = false;
-    setState(() {});
   }
 
   @override

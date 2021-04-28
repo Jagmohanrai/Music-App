@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:musicap/player.dart';
 import 'constants.dart' as cst;
+import 'package:permission_handler/permission_handler.dart';
 
 class MusicList extends StatefulWidget {
   @override
@@ -20,6 +21,7 @@ class _MusicListState extends State<MusicList> {
   void initState() {
     super.initState();
     getSongs();
+    permissionhandle();
   }
 
   void getSongs() async {
@@ -28,6 +30,14 @@ class _MusicListState extends State<MusicList> {
       songs = songs;
       loading = false;
     });
+  }
+
+  void permissionhandle() async {
+    var status = await Permission.storage.status;
+    print(status);
+    if (status.isDenied) {
+      await Permission.storage.request();
+    }
   }
 
   void changetrack(bool isnext) {
