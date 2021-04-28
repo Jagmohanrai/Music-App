@@ -1,41 +1,88 @@
 import 'package:flute_music_player/flute_music_player.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_audio_query/flutter_audio_query.dart';
+import 'package:just_audio/just_audio.dart';
+import 'package:musicap/songsList.dart';
 
 class Player extends StatefulWidget {
-  final songname;
-  final singername;
-  final albumname;
-  final uri;
-  final duration;
+  SongInfo songInfo;
+  Function changetrack;
+  final GlobalKey<PlayerState> key;
 
-  const Player(
-      {Key key,
-      this.songname,
-      this.singername,
-      this.albumname,
-      this.uri,
-      this.duration})
-      : super(key: key);
+  Player({
+    this.songInfo,
+    this.changetrack,
+    this.key,
+  }) : super(key: key);
   @override
-  _PlayerState createState() => _PlayerState();
+  PlayerState createState() => PlayerState();
 }
 
-class _PlayerState extends State<Player> {
+class PlayerState extends State<Player> {
   MusicFinder audioPlayer = new MusicFinder();
-  bool playing = true;
+  AudioPlayer player = new AudioPlayer();
+
+  bool playing = false;
 
   double duration = 0.0;
+  double minimumValue = 0.0;
+  double maxValue = 0.0;
+  double currentvalue = 0.0;
+  String currentTime = '', endTime = '';
 
-  Future _playLocal(String uri) async {
-    playing = true;
-    setState(() {});
-    final result = await audioPlayer.play(uri, isLocal: true);
+  // Future _playLocal(String uri) async {
+  //   playing = true;
+  //   setState(() {});
+  //   final result = await audioPlayer.play(uri, isLocal: true);
+  // }
+
+  void playSong(SongInfo songInfo) async {
+    widget.songInfo = songInfo;
+    await player.setUrl(widget.songInfo.uri);
+    currentvalue = minimumValue;
+    maxValue = player.duration.inMilliseconds.toDouble();
+    setState(() {
+      currentTime = getDuration(currentvalue);
+      endTime = getDuration(maxValue);
+    });
+    playing = false;
+    changeStatus();
+    player.positionStream.listen((duration) {
+      currentvalue = duration.inMilliseconds.toDouble();
+      setState(() {
+        currentTime = getDuration(currentvalue);
+      });
+    });
+  }
+
+  String getDuration(double value) {
+    Duration duration = Duration(milliseconds: value.round());
+
+    return [duration.inMinutes, duration.inSeconds]
+        .map((e) => e.remainder(60).toString().padLeft(2, '0'))
+        .join(':');
   }
 
   @override
   void initState() {
     super.initState();
-    _playLocal(widget.uri);
+    playSong(widget.songInfo);
+  }
+
+  void dispose() {
+    super.dispose();
+    player?.dispose();
+  }
+
+  void changeStatus() {
+    setState(() {
+      playing = !playing;
+    });
+    if (playing) {
+      player.play();
+    } else {
+      player.pause();
+    }
   }
 
   Future pause() async {
@@ -58,20 +105,28 @@ class _PlayerState extends State<Player> {
                 Icons.arrow_back_ios_rounded,
                 color: Colors.black45,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
             centerTitle: true,
-            title: Text(
-              'Player',
-              style: TextStyle(
-                color: Colors.black45,
-                fontSize: 25,
+            title: Padding(
+              padding: EdgeInsets.only(right: 8.0),
+              child: Text(
+                'Player',
+                style: TextStyle(
+                  color: Colors.black45,
+                  fontSize: 25,
+                ),
               ),
             ),
             actions: [
-              Icon(
-                Icons.more_vert,
-                color: Colors.black45,
+              Padding(
+                padding: EdgeInsets.only(right: 10.0),
+                child: Icon(
+                  Icons.more_vert,
+                  color: Colors.black45,
+                ),
               ),
             ],
           ),
@@ -146,7 +201,7 @@ class _PlayerState extends State<Player> {
                         Container(
                           width: 300,
                           child: Text(
-                            widget.songname,
+                            widget.songInfo.title,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                             style: TextStyle(
@@ -170,9 +225,9 @@ class _PlayerState extends State<Player> {
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20),
                       child: Text(
-                        widget.singername + "-" + widget.albumname,
+                        widget.songInfo.artist + "-" + widget.songInfo.album,
                         overflow: TextOverflow.ellipsis,
-                        maxLines: 3,
+                        maxLines: 1,
                         style: TextStyle(
                           fontSize: 18,
                           color: Colors.black45,
@@ -185,10 +240,14 @@ class _PlayerState extends State<Player> {
                     child: Slider(
                       activeColor: Color.fromRGBO(38, 78, 139, 1),
                       inactiveColor: Colors.black38,
-                      value: duration,
+                      min: minimumValue,
+                      max: maxValue,
+                      value: currentvalue,
                       onChanged: (v) {
                         setState(() {
-                          duration = v;
+                          currentvalue = v;
+                          player.seek(
+                              Duration(milliseconds: currentvalue.round()));
                         });
                       },
                     ),
@@ -199,11 +258,11 @@ class _PlayerState extends State<Player> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "1:20",
+                          currentTime,
                           style: TextStyle(fontSize: 17, color: Colors.black45),
                         ),
                         Text(
-                          widget.duration,
+                          endTime,
                           style: TextStyle(
                             fontSize: 17,
                             color: Colors.black45,
@@ -225,7 +284,7 @@ class _PlayerState extends State<Player> {
                       ),
                       InkWell(
                         onTap: () {
-                          audioPlayer.seek(-10.0);
+                          widget.changetrack(false);
                         },
                         child: Icon(
                           Icons.skip_previous,
@@ -235,19 +294,19 @@ class _PlayerState extends State<Player> {
                       ),
                       InkWell(
                         onTap: () {
-                          playing ? pause() : _playLocal(widget.uri);
+                          changeStatus();
                         },
                         child: Icon(
                           playing
-                              ? Icons.pause_circle_filled
-                              : Icons.play_circle_fill,
+                              ? Icons.pause_circle_filled_rounded
+                              : Icons.play_circle_fill_rounded,
                           size: 70,
                           color: Color.fromRGBO(38, 78, 139, 1),
                         ),
                       ),
                       InkWell(
                         onTap: () {
-                          audioPlayer.seek(10.0);
+                          widget.changetrack(true);
                         },
                         child: Icon(
                           Icons.skip_next,
@@ -255,10 +314,20 @@ class _PlayerState extends State<Player> {
                           color: Colors.black45,
                         ),
                       ),
-                      Icon(
-                        Icons.queue_music,
-                        color: Colors.black45,
-                        size: 40,
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SongList(),
+                            ),
+                          );
+                        },
+                        child: Icon(
+                          Icons.queue_music,
+                          color: Colors.black45,
+                          size: 40,
+                        ),
                       ),
                     ],
                   )

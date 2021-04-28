@@ -1,6 +1,6 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flute_music_player/flute_music_player.dart';
-import 'package:musicap/musiccard.dart';
+import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:musicap/player.dart';
 
 class MusicList extends StatefulWidget {
@@ -9,21 +9,46 @@ class MusicList extends StatefulWidget {
 }
 
 class _MusicListState extends State<MusicList> {
-  MusicFinder audioplayer = new MusicFinder();
-  List<Song> song;
+  // MusicFinder audioplayer = new MusicFinder();
+  final FlutterAudioQuery audioQuery = FlutterAudioQuery();
+  final GlobalKey<PlayerState> key = GlobalKey<PlayerState>();
+  List<SongInfo> songs = [];
+  // List<Song> song;
+  int currentIndex = 0;
   @override
   void initState() {
     super.initState();
-    findMusic();
+    getSongs();
   }
 
-  void findMusic() async {
-    List<Song> songs = await MusicFinder.allSongs();
-    songs = new List.from(songs);
+  void getSongs() async {
+    songs = await audioQuery.getSongs();
     setState(() {
-      song = songs;
+      songs = songs;
       loading = false;
     });
+  }
+
+  // void findMusic() async {
+  //   List<Song> songs = await MusicFinder.allSongs();
+  //   songs = new List.from(songs);
+  //   setState(() {
+  //     song = songs;
+  //     loading = false;
+  //   });
+  // }
+
+  void changetrack(bool isnext) {
+    if (isnext) {
+      if (currentIndex != songs.length - 1) {
+        currentIndex++;
+      }
+    } else {
+      if (currentIndex != 0) {
+        currentIndex--;
+      }
+    }
+    key.currentState.playSong(songs[currentIndex]);
   }
 
   bool loading = true;
@@ -49,10 +74,13 @@ class _MusicListState extends State<MusicList> {
             backgroundColor: Colors.white,
             elevation: 0,
             actions: [
-              Icon(
-                Icons.more_vert_rounded,
-                color: Colors.black45,
-                size: 30,
+              Padding(
+                padding: EdgeInsets.only(right: 10.0),
+                child: Icon(
+                  Icons.more_vert_rounded,
+                  color: Colors.black45,
+                  size: 30,
+                ),
               ),
             ],
           ),
@@ -147,18 +175,186 @@ class _MusicListState extends State<MusicList> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          MusicCard(
-                            albumart: song[0].albumArt,
-                            singername: song[0].artist,
-                            songname: song[0].title,
-                            uri: song[0].uri,
+                          Container(
+                            height: 230,
+                            width: 170,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  fit: BoxFit.fill,
+                                  image: AssetImage(
+                                    'assets/album.jpg',
+                                  )),
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            child: Align(
+                              alignment: Alignment(0, 0.88),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 0),
+                                child: InkWell(
+                                  onTap: () {
+                                    currentIndex = 1;
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Player(
+                                          songInfo: songs[1],
+                                          changetrack: changetrack,
+                                          key: key,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.white60,
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              width: 120,
+                                              child: Padding(
+                                                padding: EdgeInsets.only(
+                                                  top: 4.0,
+                                                  left: 4.0,
+                                                ),
+                                                child: Text(
+                                                  songs[3].title,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 1,
+                                                  softWrap: false,
+                                                  style:
+                                                      TextStyle(fontSize: 14),
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 120,
+                                              child: Padding(
+                                                padding: EdgeInsets.only(
+                                                    top: 4.0, left: 4.0),
+                                                child: Text(
+                                                  songs[1].artist,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Icon(
+                                          Icons.play_circle_fill,
+                                          color: Colors.white,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
-                          MusicCard(
-                            albumart: song[0].albumArt,
-                            singername: song[0].artist,
-                            songname: song[0].title,
-                            uri: song[0].uri,
-                          ),
+                          Container(
+                            height: 230,
+                            width: 170,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  fit: BoxFit.fill,
+                                  image: AssetImage(
+                                    'assets/album.jpg',
+                                  )),
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            child: Align(
+                              alignment: Alignment(0, 0.88),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 0),
+                                child: InkWell(
+                                  onTap: () {
+                                    currentIndex = 3;
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Player(
+                                          songInfo: songs[3],
+                                          changetrack: changetrack,
+                                          key: key,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.white60,
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              width: 120,
+                                              child: Padding(
+                                                padding: EdgeInsets.only(
+                                                  top: 4.0,
+                                                  left: 4.0,
+                                                ),
+                                                child: Text(
+                                                  songs[3].title,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 1,
+                                                  softWrap: false,
+                                                  style:
+                                                      TextStyle(fontSize: 14),
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 120,
+                                              child: Padding(
+                                                padding: EdgeInsets.only(
+                                                    top: 4.0, left: 4.0),
+                                                child: Text(
+                                                  songs[3].artist,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Icon(
+                                          Icons.play_circle_fill,
+                                          color: Colors.white,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          )
                         ],
                       ),
                       SizedBox(
@@ -209,15 +405,14 @@ class _MusicListState extends State<MusicList> {
                             ),
                             child: InkWell(
                               onTap: () {
-                                audioplayer.stop();
+                                currentIndex = i;
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => Player(
-                                      albumname: song[i].album,
-                                      singername: song[i].artist,
-                                      songname: song[i].title,
-                                      uri: song[i].uri,
+                                      songInfo: songs[i],
+                                      changetrack: changetrack,
+                                      key: key,
                                     ),
                                   ),
                                 );
@@ -235,7 +430,11 @@ class _MusicListState extends State<MusicList> {
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(25),
                                         image: DecorationImage(
-                                          image: AssetImage('assets/album.jpg'),
+                                          image: songs[i].albumArtwork == null
+                                              ? AssetImage('assets/album.jpg')
+                                              : FileImage(
+                                                  File(songs[i].albumArtwork),
+                                                ),
                                           fit: BoxFit.fill,
                                         ),
                                       ),
@@ -249,7 +448,7 @@ class _MusicListState extends State<MusicList> {
                                         Container(
                                           width: 200,
                                           child: Text(
-                                            song[i].title,
+                                            songs[i].title,
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 1,
                                             softWrap: false,
@@ -265,7 +464,7 @@ class _MusicListState extends State<MusicList> {
                                         Container(
                                           width: 200,
                                           child: Text(
-                                            song[i].artist,
+                                            songs[i].artist,
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 1,
                                             softWrap: false,
@@ -286,7 +485,7 @@ class _MusicListState extends State<MusicList> {
                               ),
                             ),
                           ),
-                          itemCount: song.length,
+                          itemCount: songs.length,
                         ),
                       ),
                     ],

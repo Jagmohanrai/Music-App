@@ -36,7 +36,7 @@ class _MusicCardState extends State<MusicCard> {
             height: 50,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: Colors.white54,
+              color: Colors.white60,
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -44,16 +44,31 @@ class _MusicCardState extends State<MusicCard> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      widget.songname,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontSize: 14),
+                    Container(
+                      width: 120,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          top: 4.0,
+                          left: 4.0,
+                        ),
+                        child: Text(
+                          widget.songname,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          softWrap: false,
+                          style: TextStyle(fontSize: 14),
+                        ),
+                      ),
                     ),
-                    Expanded(
-                      child: Text(
-                        widget.singername,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontSize: 12),
+                    Container(
+                      width: 120,
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 4.0, left: 4.0),
+                        child: Text(
+                          widget.singername,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(fontSize: 12),
+                        ),
                       ),
                     ),
                   ],
