@@ -21,23 +21,20 @@ class _MusicListState extends State<MusicList> {
   void initState() {
     super.initState();
     getSongs();
-    permissionhandle();
   }
 
   void getSongs() async {
+    var status = await Permission.storage.status;
+    print(status);
+    if (status.isDenied || status.isPermanentlyDenied) {
+      print('here');
+      await Permission.storage.request();
+    }
     songs = await audioQuery.getSongs();
     setState(() {
       songs = songs;
       loading = false;
     });
-  }
-
-  void permissionhandle() async {
-    var status = await Permission.storage.status;
-    print(status);
-    if (status.isDenied) {
-      await Permission.storage.request();
-    }
   }
 
   void changetrack(bool isnext) {
