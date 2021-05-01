@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
-import 'package:musicap/player.dart';
-import 'constants.dart' as cst;
+import 'package:musicap/screens/player.dart';
+import '../constants.dart' as cst;
 import 'package:permission_handler/permission_handler.dart';
 
 class MusicList extends StatefulWidget {

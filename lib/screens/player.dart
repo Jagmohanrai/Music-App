@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:musicap/songsList.dart';
-import 'constants.dart' as cst;
+import 'package:musicap/screens/musicgallary.dart';
+import '../constants.dart' as cst;
 
 class Player extends StatefulWidget {
   SongInfo songInfo;
@@ -326,7 +326,7 @@ class PlayerState extends State<Player> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => SongList(),
+                              builder: (context) => MusicGallary(),
                             ),
                           );
                         },
