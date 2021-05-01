@@ -113,49 +113,49 @@ class _MusicListState extends State<MusicList> {
                       SizedBox(
                         height: 20 * cst.responsiveCofficient(context),
                       ),
-                      Container(
-                        height: 70 * cst.responsiveCofficient(context),
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.1),
-                              spreadRadius: 5,
-                              blurRadius: 7,
-                              offset:
-                                  Offset(0, 3), // changes position of shadow
-                            ),
-                          ],
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal:
-                                  20 * cst.responsiveCofficient(context)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Search music, album.....',
-                                style: TextStyle(
-                                  color: Colors.black45,
-                                  fontSize:
-                                      16 * cst.responsiveCofficient(context),
-                                ),
-                              ),
-                              Icon(
-                                Icons.search_rounded,
-                                color: Colors.black45,
-                                size: 35 * cst.responsiveCofficient(context),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
+                      // Container(
+                      //   height: 70 * cst.responsiveCofficient(context),
+                      //   width: double.infinity,
+                      //   decoration: BoxDecoration(
+                      //     color: Colors.white,
+                      //     borderRadius: BorderRadius.circular(20),
+                      //     boxShadow: [
+                      //       BoxShadow(
+                      //         color: Colors.grey.withOpacity(0.1),
+                      //         spreadRadius: 5,
+                      //         blurRadius: 7,
+                      //         offset:
+                      //             Offset(0, 3), // changes position of shadow
+                      //       ),
+                      //     ],
+                      //   ),
+                      //   child: Padding(
+                      //     padding: EdgeInsets.symmetric(
+                      //         horizontal:
+                      //             20 * cst.responsiveCofficient(context)),
+                      //     child: Row(
+                      //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //       children: [
+                      //         Text(
+                      //           'Search music, album.....',
+                      //           style: TextStyle(
+                      //             color: Colors.black45,
+                      //             fontSize:
+                      //                 16 * cst.responsiveCofficient(context),
+                      //           ),
+                      //         ),
+                      //         Icon(
+                      //           Icons.search_rounded,
+                      //           color: Colors.black45,
+                      //           size: 35 * cst.responsiveCofficient(context),
+                      //         )
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
+                      // SizedBox(
+                      //   height: 20,
+                      // ),
                       Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: 10 * cst.responsiveCofficient(context)),
@@ -191,10 +191,11 @@ class _MusicListState extends State<MusicList> {
                             width: 170 * cst.responsiveCofficient(context),
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: AssetImage(
-                                    'assets/album.jpg',
-                                  )),
+                                fit: BoxFit.fill,
+                                image: AssetImage(
+                                  'assets/album.jpg',
+                                ),
+                              ),
                               color: Colors.black,
                               borderRadius: BorderRadius.circular(
                                   30 * cst.responsiveCofficient(context)),
@@ -413,41 +414,17 @@ class _MusicListState extends State<MusicList> {
                       Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: 20 * cst.responsiveCofficient(context)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Recently',
-                              style: TextStyle(
-                                fontSize:
-                                    18 * cst.responsiveCofficient(context),
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            Text(
-                              'Popular',
-                              style: TextStyle(
-                                fontSize:
-                                    18 * cst.responsiveCofficient(context),
-                                color: Colors.black45,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            Text(
-                              'Similer',
-                              style: TextStyle(
-                                fontSize:
-                                    18 * cst.responsiveCofficient(context),
-                                color: Colors.black45,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
+                        child: Text(
+                          'All Songs',
+                          style: TextStyle(
+                            fontSize: 18 * cst.responsiveCofficient(context),
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                       SizedBox(
-                        height: 20 * cst.responsiveCofficient(context),
+                        height: 10 * cst.responsiveCofficient(context),
                       ),
                       Container(
                         height: 500 * cst.responsiveCofficient(context),

@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:musicap/screens/player.dart';
+import 'package:musicap/subscreens/artistsubscreen.dart';
 import '../constants.dart' as cst;
 
 class ArtistList extends StatefulWidget {
@@ -42,7 +43,15 @@ class _ArtistListState extends State<ArtistList> {
           ),
           child: InkWell(
             onTap: () {
-              
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ArtistSubScreen(
+                    artistId: artists[i].id,
+                    artistname: artists[i].name,
+                  ),
+                ),
+              );
             },
             child: Container(
               height: 100 * cst.responsiveCofficient(context),

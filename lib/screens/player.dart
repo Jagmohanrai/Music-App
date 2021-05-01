@@ -29,12 +29,6 @@ class PlayerState extends State<Player> {
   double currentvalue = 0.0;
   String currentTime = '', endTime = '';
 
-  // Future _playLocal(String uri) async {
-  //   playing = true;
-  //   setState(() {});
-  //   final result = await audioPlayer.play(uri, isLocal: true);
-  // }
-
   void playSong(SongInfo songInfo) async {
     widget.songInfo = songInfo;
     await player.setUrl(widget.songInfo.uri);
@@ -47,6 +41,10 @@ class PlayerState extends State<Player> {
     playing = false;
     changeStatus();
     player.positionStream.listen((duration) {
+      if (currentvalue >= maxValue) {
+        widget.changetrack(true);
+      }
+
       currentvalue = duration.inMilliseconds.toDouble();
       setState(() {
         currentTime = getDuration(currentvalue);
