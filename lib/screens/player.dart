@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:just_audio/just_audio.dart';
@@ -185,7 +187,11 @@ class PlayerState extends State<Player> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
                       image: DecorationImage(
-                        image: AssetImage('assets/album.jpg'),
+                        image: widget.songInfo.albumArtwork == null
+                            ? AssetImage('assets/album.jpg')
+                            : FileImage(
+                                File(widget.songInfo.albumArtwork),
+                              ),
                       ),
                     ),
                   ),

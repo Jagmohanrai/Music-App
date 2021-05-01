@@ -113,49 +113,6 @@ class _MusicListState extends State<MusicList> {
                       SizedBox(
                         height: 20 * cst.responsiveCofficient(context),
                       ),
-                      // Container(
-                      //   height: 70 * cst.responsiveCofficient(context),
-                      //   width: double.infinity,
-                      //   decoration: BoxDecoration(
-                      //     color: Colors.white,
-                      //     borderRadius: BorderRadius.circular(20),
-                      //     boxShadow: [
-                      //       BoxShadow(
-                      //         color: Colors.grey.withOpacity(0.1),
-                      //         spreadRadius: 5,
-                      //         blurRadius: 7,
-                      //         offset:
-                      //             Offset(0, 3), // changes position of shadow
-                      //       ),
-                      //     ],
-                      //   ),
-                      //   child: Padding(
-                      //     padding: EdgeInsets.symmetric(
-                      //         horizontal:
-                      //             20 * cst.responsiveCofficient(context)),
-                      //     child: Row(
-                      //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //       children: [
-                      //         Text(
-                      //           'Search music, album.....',
-                      //           style: TextStyle(
-                      //             color: Colors.black45,
-                      //             fontSize:
-                      //                 16 * cst.responsiveCofficient(context),
-                      //           ),
-                      //         ),
-                      //         Icon(
-                      //           Icons.search_rounded,
-                      //           color: Colors.black45,
-                      //           size: 35 * cst.responsiveCofficient(context),
-                      //         )
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
-                      // SizedBox(
-                      //   height: 20,
-                      // ),
                       Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: 10 * cst.responsiveCofficient(context)),
@@ -250,7 +207,7 @@ class _MusicListState extends State<MusicList> {
                                                           context),
                                                 ),
                                                 child: Text(
-                                                  songs[3].title,
+                                                  songs[1].title,
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   maxLines: 1,
